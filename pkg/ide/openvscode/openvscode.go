@@ -162,10 +162,16 @@ func (o *OpenVSCodeServer) getReleaseUrl() string {
 		if url == "" {
 			url = fmt.Sprintf(DownloadArm64Template, version, version)
 		}
+		if os.Getenv("DEVPOD_FORCE_OPENVSCODE_ARM64") != "" {
+			url = os.Getenv("DEVPOD_FORCE_OPENVSCODE_ARM64")
+		}
 	} else {
 		url = Options.GetValue(o.values, DownloadAmd64Option)
 		if url == "" {
 			url = fmt.Sprintf(DownloadAmd64Template, version, version)
+		}
+		if os.Getenv("DEVPOD_FORCE_OPENVSCODE_AMD64") != "" {
+			url = os.Getenv("DEVPOD_FORCE_OPENVSCODE_AMD64")
 		}
 	}
 
